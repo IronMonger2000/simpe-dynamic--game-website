@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="Stylesheet" href="style.css" />
+    <title>Three click win</title>
+  </head>
+
+  <body>
+    <div>
+      <div class="win">
+        <h1>THREE THREE THREE MATCH COLOR</h1>
+      </div>
+
+      <div class="mainBox">
+        <div class="Win_card"></div>
+      </div>
+      <div class="box">
+        <div>
+          <div class="card" data-color="blue"></div>
+          <div class="card" data-color="red"></div>
+        </div>
+        <div>
+          <div class="card" data-color="blue"></div>
+          <div class="card" data-color="red"></div>
+        </div>
+        <div>
+          <div class="card" data-color="blue"></div>
+          <div class="card" data-color="red"></div>
+        </div>
+        <div>
+          <div class="card" data-color="blue"></div>
+          <div class="card" data-color="red"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      var rand_colors = ["green", "blue", "red"];
+      let WinCard = document.querySelector(".Win_card");
+      let Win_color =
+        rand_colors[Math.floor(Math.random() * rand_colors.length)];
+      WinCard.classList.add(Win_color);
+      let list = document.querySelectorAll(".card");
+      for (let i = 0; i < list.length; i++) {
+        list[i].addEventListener("dblclick", function (e) {
+          let classColorToBeAttached =
+            e.currentTarget.getAttribute("data-color");
+
+          if (classColorToBeAttached == "red") {
+            console.log("red");
+            e.currentTarget.setAttribute("data-color", "blue");
+            e.currentTarget.classList.remove("red");
+            e.currentTarget.classList.add("blue");
+            if (Win_color == "blue") {
+              let winElm = document.createElement("h1");
+              winElm.innerText = "WIN";
+              let prev = document.querySelector(".win");
+              prev.appendChild(winElm);
+            }
+          } else if (classColorToBeAttached == "blue") {
+            console.log("blue");
+            e.currentTarget.setAttribute("data-color", "green");
+            e.currentTarget.classList.remove("blue");
+            e.currentTarget.classList.add("green");
+            if (Win_color == "green") {
+              let winElm = document.createElement("h1");
+              winElm.innerText = "WIN";
+              let prev = document.querySelector(".win");
+              prev.appendChild(winElm);
+            }
+          } else if (classColorToBeAttached == "green") {
+            console.log("green");
+            e.currentTarget.setAttribute("data-color", "red");
+            e.currentTarget.classList.remove("green");
+            e.currentTarget.classList.add("red");
+            if (Win_color == "red") {
+              let winElm = document.createElement("h1");
+              winElm.innerText = "WIN";
+              let prev = document.querySelector(".win");
+              prev.appendChild(winElm);
+            }
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
